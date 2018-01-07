@@ -57,11 +57,11 @@ export class DynamoDBManager {
 
       keyConditions[this.config.hashKeyAttributeName] = {
         ComparisonOperator: "EQ",
-        AttributeValueList: [{ N: hashKey.toString(10) }]
+        AttributeValueList: [parseFloat(hashKey.toString(10))]
       };
 
-      const minRange: DynamoDB.AttributeValue = { N: range.rangeMin.toString(10) };
-      const maxRange: DynamoDB.AttributeValue = { N: range.rangeMax.toString(10) };
+      const minRange: DynamoDB.AttributeValue = parseFloat(range.rangeMin.toString(10));
+      const maxRange: DynamoDB.AttributeValue = parseFloat(range.rangeMax.toString(10));
 
       keyConditions[this.config.geohashAttributeName] = {
         ComparisonOperator: "BETWEEN",
